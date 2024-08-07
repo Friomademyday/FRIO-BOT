@@ -6,7 +6,7 @@
 <p>Owner's Phone Number: +234 708 214 4781</p>
 
 <h2>Bot Link</h2>
-<p>Chat with the bot: <a href="(https://wa.link/73m76g)">Click here</a></p>
+<p>Chat with the bot: https://wa.link/73m76g</p>
 
 <h2>Features</h2>
 <p>Economic Features</p>
