@@ -4,7 +4,6 @@
 
 <h2>Contact Information</h2>
 <p>Owner's Phone Number: +234 708 214 4781</p>
-<p>Owner's WhatsApp Link: <a href="(https://wa.link/zk760e)">Contact the owner</a></p>
 
 <h2>Bot Link</h2>
 <p>Chat with the bot: <a href="(https://wa.link/73m76g)">Click here</a></p>
