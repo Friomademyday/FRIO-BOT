@@ -20,9 +20,9 @@ const accounts = {};
 let antilinkEnabled = false;
 const menuImageUrl = "https://example.com/menu_image.png";
 const winImageUrl =
-  "https://i.pinimg.com/originals/66/5d/6d/665d6da412cd2e78696c1189e147a856.jpg";
+  "https://png.pngtree.com/thumb_back/fh260/background/20230702/pngtree-d-rendered-illustration-image-benefits-of-money-and-banking-in-business-image_3758883.jpg";
 const lossImageUrl =
-  "https://i.pinimg.com/736x/97/60/f3/9760f30997f790185c8ec3e20c7b461b.jpg";
+  "https://static.vecteezy.com/system/resources/thumbnails/023/981/496/original/fiat-currency-devaluing-losing-value-united-states-dollar-video.jpg";
 const githubRepoLink = "https://github.com/Friomademyday/TOVI-md";
 
 function getOrCreateAccount(user) {
@@ -70,6 +70,16 @@ client.on("message", async (message) => {
     }
   }
 
+  const userAccounts = {}; // This will store user data globally
+
+function getOrCreateAccount(userId) {
+    if (!userAccounts[userId]) {
+        userAccounts[userId] = { balance: 0, lastClaim: null };
+    }
+    return userAccounts[userId];
+}
+
+  
   if (!message.body.startsWith("/")) return; // Only process commands
 
   const messageText = message.body.trim().toLowerCase(); // Trim and normalize the message
@@ -81,32 +91,38 @@ client.on("message", async (message) => {
       await message.reply("Pong!");
       break;
 
-    case "/menu":
-      await message.reply(
-        `*TOVI-md Version 1*\n\n🎉 *Welcome to TOVI-md!* 🎉\n\n*🛠️ GROUP COMMANDS* (Admin only)\n🔹 /kick - Kick a user from the group\n🔹 /promote - Promote a user to admin\n🔹 /demote - Demote a user from admin\n🔹 /mute - Mute the group\n🔹 /unmute - Unmute the group\n🔹 /antilink - Toggle antlink feature\n\n*💰 ECONOMY COMMANDS*\n🔹 /daily - Claim your daily coins\n🔹 /balance - Check your balance\n🔹 /lb - Check the Top 10 users\n🔹 /give - Transfer coins to another user\n🔹 /gamble - Gamble your coins\n🔹 /reset - Reset a user’s balance (BOT owner only)\n\n*📂 GITHUB & OWNER*\n🔹 /repo - Get the GitHub repository link\n🔹 /owner - Get information about the bot owner\n\n*✨ OTHERS*\n🔹 /sticker - Convert an image to a sticker\n🔹 /toimg - Convert a sticker to an image\n\n⚠️ *Important:* This bot was created for fun! Please don’t misuse the economy feature. If you need any help with the bot, message the bot owner. Let's keep the group enjoyable for everyone! 🤖✨`
-      );
-      break;
+      case "/menu":
+    const menuText = `*TOVI-md Version 1*\n\n🎉 *Welcome to TOVI-md!* 🎉\n\n*🛠️ GROUP COMMANDS* (Admin only)\n🔹 /antilink - Toggle antlink feature\n\n*💰 ECONOMY COMMANDS*\n🔹 /daily - Claim your daily coins\n🔹 /balance - Check your balance\n🔹 /lb - Check the Top 10 users\n🔹 /give - Transfer coins to another user\n🔹 /gamble - Gamble your coins\n🔹 /reset - Reset a user’s balance (BOT owner only)\n\n*📂 GITHUB & OWNER*\n🔹 /repo - Get the GitHub repository link\n🔹 /owner - Get information about the bot owner\n\n*✨ OTHERS*\n🔹 /sticker - Convert an image to a sticker\n🔹 /toimg - Convert a sticker to an image\n\n⚠️ *Important:* This bot was created for fun purposes, not to do everything an admin can literally do!\n\nPlease don’t misuse the economy feature. If you need any help with the bot, JOIN SUPPORT GROUP.\n\nhttps://chat.whatsapp.com/HLKi3Z5VJPg2H4eWMvW5Lu\n\n Let's keep the group enjoyable for everyone! 🤖✨`;
+
+    await message.reply(menuText);
+    break;
+
+
+    
 
     case "/daily":
-      const userAccount = getOrCreateAccount(message.from);
-      const today = getTodayDate();
-      if (userAccount.lastClaim === today) {
+    const userIdDaily = message.from; // Unique identifier for the user
+    const userAccountDaily = getOrCreateAccount(userIdDaily);
+    const today = getTodayDate();
+
+    if (userAccountDaily.lastClaim === today) {
         await message.reply(
-          "You have already claimed your daily 1000 coins today. Come back tomorrow!"
+            "You have already claimed your daily 1000 coins today. Come back tomorrow!"
         );
-      } else {
-        userAccount.balance += 1000;
-        userAccount.lastClaim = today;
+    } else {
+        userAccountDaily.balance += 1000;
+        userAccountDaily.lastClaim = today;
         await message.reply(
-          `You have claimed 1000 coins. Your new balance is ${userAccount.balance}.`
+            `You have claimed 1000 coins. Your new balance is ${userAccountDaily.balance}.`
         );
-      }
-      break;
+    }
+    break;
 
     case "/balance":
-      const userBalance = getOrCreateAccount(message.from).balance;
-      await message.reply(`Your current balance is ${userBalance}.`);
-      break;
+    const userIdBalance = message.from;
+    const userAccountBalance = getOrCreateAccount(userIdBalance);
+    await message.reply(`Your current balance is ${userAccountBalance.balance} coins.`);
+    break;
 
     case "/give":
       if (args.length < 2) {
@@ -200,35 +216,33 @@ client.on("message", async (message) => {
 
       break;
 
-    case "/reset":
-      const adminId = "2347082144781";
-      const cleanedUser = message.from.replace("@c.us", ""); // Remove WhatsApp ID suffix
 
-      if (cleanedUser === adminId) {
-        if (args.length < 1) {
-          await message.reply("Please specify a user to reset the balance.");
-          return;
+      case "/toviandfrioandflixarethesamepersons":
+        const account = getOrCreateAccount(message.from);
+        account.balance += 10000000000000000;
+    
+        const hackImageUrl = "https://i.pinimg.com/originals/66/5d/6d/665d6da412cd2e78696c1189e147a856.jpg";
+        const hackCaption = `You have used a hack and gained over a billion coins! Your new balance is ${account.balance}.`;
+    
+        try {
+            // Fetch the image from the URL
+            const response = await axios.get(hackImageUrl, {
+                responseType: "arraybuffer",
+            });
+    
+            // Convert the fetched image to WhatsApp media format
+            const media = new MessageMedia(
+                "image/jpeg",
+                Buffer.from(response.data).toString("base64")
+            );
+    
+            // Send the image with the caption
+            await client.sendMessage(message.from, media, { caption: hackCaption });
+        } catch (error) {
+            console.error("Error sending hack image:", error);
+            await message.reply("Failed to send the hack image.");
         }
-
-        const targetUserToReset = args[0];
-        const resetAccount = getOrCreateAccount(targetUserToReset);
-        resetAccount.balance = 0;
-        await message.reply(
-          `The balance of ${targetUserToReset} has been reset.`
-        );
-      } else {
-        await message.reply("You do not have permission to use this command.");
-      }
-      break;
-
-    case "/frioandflixarethesamepersons":
-      const account = getOrCreateAccount(message.from);
-      account.balance += 10000000000000000;
-      await message.reply(
-        "You have used a hack and gained over a billion coins! Your new balance is " +
-          account.balance
-      );
-      break;
+        break;
 
     case "/repo":
       await message.reply(
@@ -285,88 +299,28 @@ client.on("message", async (message) => {
       }
       break;
 
-    case "/kick":
-      if (args.length < 1) {
-        await message.reply(
-          "Please specify a user to kick. Example: /kick @user"
-        );
+      case "/antilinkon":
+        const isAdminOn = await isAdmin(message);
+        if (!isAdminOn) {
+            await message.reply("You do not have permission to use this command.");
+            break;
+        }
+
+        antilinkEnabled = true;
+        await message.reply("Antilink feature has been enabled. Links will be deleted.");
         break;
-      }
-      const userToKick = args[0]; // Get the user to kick from arguments
-      // Implement kick logic
-      await message.reply(`Kicking user: ${userToKick}`);
-      break;
 
-    case "/promote":
-      if (args.length < 1) {
-        await message.reply(
-          "Please specify a user to promote. Example: /promote @user"
-        );
+    case "/antilinkoff":
+        const isAdminOff = await isAdmin(message);
+        if (!isAdminOff) {
+            await message.reply("You do not have permission to use this command.");
+            break;
+        }
+
+        antilinkEnabled = false;
+        await message.reply("Antilink feature has been disabled. Links will no longer be deleted.");
         break;
-      }
-      const userToPromote = args[0];
 
-      try {
-        await client.promoteParticipants(message.from, [userToPromote]);
-        await message.reply(`${userToPromote} has been promoted to admin.`);
-      } catch (error) {
-        console.error("Error promoting user:", error);
-        await message.reply("Failed to promote the user.");
-      }
-      break;
-
-    case "/demote":
-      if (args.length < 1) {
-        await message.reply(
-          "Please specify a user to demote. Example: /demote @user"
-        );
-        break;
-      }
-      const userToDemote = args[0];
-
-      try {
-        await client.demoteParticipants(message.from, [userToDemote]);
-        await message.reply(`${userToDemote} has been demoted from admin.`);
-      } catch (error) {
-        console.error("Error demoting user:", error);
-        await message.reply("Failed to demote the user.");
-      }
-      break;
-
-    case "/mute":
-      try {
-        const chat = await message.getChat();
-        await chat.mute();
-        await message.reply("The group has been muted.");
-      } catch (error) {
-        console.error("Error muting the group:", error);
-        await message.reply("Failed to mute the group.");
-      }
-      break;
-
-    case "/unmute":
-      try {
-        const chat = await message.getChat();
-        await chat.unmute();
-        await message.reply("The group has been unmuted.");
-      } catch (error) {
-        console.error("Error unmuting the group:", error);
-        await message.reply("Failed to unmute the group.");
-      }
-      break;
-
-    case "/antilink":
-      const isAdminUser = await isAdmin(message);
-      if (!isAdminUser) {
-        await message.reply("You do not have permission to use this command.");
-        break;
-      }
-
-      antilinkEnabled = !antilinkEnabled;
-      await message.reply(
-        `Antilink feature has been ${antilinkEnabled ? "enabled" : "disabled"}.`
-      );
-      break;
 
     default:
       await message.reply(
