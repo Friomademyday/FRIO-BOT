@@ -70,14 +70,7 @@ client.on("message", async (message) => {
     }
   }
 
-  const userAccounts = {}; // This will store user data globally
-
-function getOrCreateAccount(userId) {
-    if (!userAccounts[userId]) {
-        userAccounts[userId] = { balance: 0, lastClaim: null };
-    }
-    return userAccounts[userId];
-}
+  const userAccounts = {}; // Move this to the top of your file, outside the event handler
 
   
   if (!message.body.startsWith("/")) return; // Only process commands
