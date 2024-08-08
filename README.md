@@ -3,7 +3,7 @@
 <p>Programming Language: JavaScript</p>
 
 <h2>Bot Link</h2>
-<p>Chat with the bot: https://wa.link/73m76g</p>
+<p>Chat with the bot on support group: https://chat.whatsapp.com/HLKi3Z5VJPg2H4eWMvW5Lu </p>
 
 <h2>Features</h2>
 <p>Economic Features</p>
@@ -14,3 +14,9 @@
 
 <h2>Technical Details</h2>
 <p>Built using JavaScript</p>
+<hr>
+<div><b>STEPS FOR KOYEB DEPLOYMENT
+<div>
+  
+</div>
+</b></div>
