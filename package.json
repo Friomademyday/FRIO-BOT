@@ -1,12 +1,10 @@
-
 {
   "name": "whatsapp-bot",
   "version": "1.0.0",
   "description": "A bot for interacting with WhatsApp using Node.js and whatsapp-web.js",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "apt-get update && apt-get install -y libatk-1.0-0"
+    "start": "node index.js"
   },
   "keywords": [
     "whatsapp",
