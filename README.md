@@ -1,3 +1,5 @@
+![Imageclub](Media/Imageclub.jpeg)
+
 <h2>Bot Overview</h2>
 <p>Platform: WhatsApp</p>
 <p>Programming Language: JavaScript</p>
